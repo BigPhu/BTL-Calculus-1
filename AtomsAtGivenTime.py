@@ -1,4 +1,5 @@
-import numpy as np                
+import numpy as np    
+from fractions import Fraction         
 import matplotlib.pyplot as plt   
 
 
@@ -34,6 +35,7 @@ def drawPoint(xCoord, yCoord, pColor, pSize):
     # ------------------------------------------------------------
     plt.scatter(xCoord, yCoord, pSize*20, color = pColor, zorder = 5)
 
+
     # Plot dash-lines that connect the point above to both axes
     # ---------------------------------------------------------
     if pSize - 2 != 0:
@@ -46,6 +48,7 @@ def drawPoint(xCoord, yCoord, pColor, pSize):
         plt.plot([xMin, xCoord],[yCoord, yCoord], color = '#000000', marker = 'none', linestyle = '--', linewidth = 1, zorder = 3)
         # Vertical line
         plt.plot([xCoord, xCoord], [yCoord, yMin], color = '#000000', marker = 'none', linestyle = '--',  linewidth = 1, zorder = 3)
+
 
 # Customizations
 # --------------
@@ -65,6 +68,7 @@ yTicksFrequency = yMax/10
 # Figure Size
 figWidth = 5
 figHeight = 5
+
 
 # Set Values
 # ----------
@@ -120,9 +124,10 @@ drawLine(300, INITIAL_ATOMS, '#d00b8a', 'none', '-', 3, "Half-life = 300 years")
 # drawPoint Format: drawPoint(xCoord, yCoord, pColor, pSize)
 drawPoint(300, INITIAL_ATOMS/2, '#d00b8a', 3)
 
+
 # Making the Graph More Readable by Adding Labels
 # -----------------------------------------------
-plt.title('Number of Atoms at Any Given Time ')
+plt.title('Number of Atoms at Any Given Time (' + str(Fraction(scale).numerator) + ':' + str(Fraction(scale).denominator) + ')')
 plt.xlabel('Time (years)')
 plt.ylabel('Number of Atoms')
 plt.legend()
