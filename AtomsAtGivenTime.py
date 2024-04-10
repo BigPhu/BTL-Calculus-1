@@ -21,29 +21,31 @@ def f(time, iAtoms, hLife):
 
 # Function that Plot and Format the Graph 
 # ---------------------------------------
-def plotThis(iAtoms, hLife, gMarker, gStyle, gColor, gLabel, gWidth):
+def drawLine(hLife, iAtoms, gColor, gMarker, gStyle, gWidth, gLabel):
     # Plot actual lines
     # -----------------
     atom = f(time, iAtoms, hLife)
-    plt.plot(time, atom, marker = gMarker, color = gColor, linestyle = gStyle, label = gLabel, linewidth = gWidth, zorder = 4)
+    plt.plot(time, atom, color = gColor, marker = gMarker, linestyle = gStyle, linewidth = gWidth, label = gLabel, zorder = 4)
+    
 
+# Function that Draw a Point in Desired Location
+def drawPoint(xCoord, yCoord, pColor, pSize):
     # Plot marker at the point where the number of atoms is halved 
     # ------------------------------------------------------------
-    plt.scatter(hLife, iAtoms/2, gWidth*20, color = gColor, zorder = 5)
+    plt.scatter(xCoord, yCoord, pSize*20, color = pColor, zorder = 5)
 
     # Plot dash-lines that connect the point above to both axes
     # ---------------------------------------------------------
-    if gWidth - 2 != 0:
+    if pSize - 2 != 0:
         # Horizontal line
-        plt.plot([xMin, hLife],[iAtoms/2, iAtoms/2], color = '#000000', linestyle = '--', linewidth = gWidth - 2, zorder = 3)
+        plt.plot([xMin, xCoord],[yCoord, yCoord], color = '#000000', marker = 'none', linestyle = '--', linewidth = pSize - 2, zorder = 3)
         # Vertical line
-        plt.plot([hLife, hLife], [iAtoms/2, yMin], marker = 'none', color = '#000000', linestyle = '--',  linewidth = gWidth - 2, zorder = 3)
+        plt.plot([xCoord, xCoord], [yCoord, yMin], color = '#000000', marker = 'none', linestyle = '--',  linewidth = pSize - 2, zorder = 3)
     else:
         # Horizontal line
-        plt.plot([xMin, hLife],[iAtoms/2, iAtoms/2], color = '#000000', linestyle = '--', linewidth = 1, zorder = 3)
+        plt.plot([xMin, xCoord],[yCoord, yCoord], color = '#000000', marker = 'none', linestyle = '--', linewidth = 1, zorder = 3)
         # Vertical line
-        plt.plot([hLife, hLife], [iAtoms/2, yMin], marker = 'none', color = '#000000', linestyle = '--',  linewidth = 1, zorder = 3)
-
+        plt.plot([xCoord, xCoord], [yCoord, yMin], color = '#000000', marker = 'none', linestyle = '--',  linewidth = 1, zorder = 3)
 
 # Customizations
 # --------------
@@ -52,7 +54,7 @@ xMin = 0
 xMax = 1000
 # Y-axis
 yMin = 0
-yMax = 500
+yMax = 100
 # Offset (better to set it to 0)
 offset = 0
 # Axes Scale
@@ -64,11 +66,10 @@ yTicksFrequency = yMax/10
 figWidth = 5
 figHeight = 5
 
-
 # Set Values
 # ----------
 time = np.linspace(0, xMax, num = 1000)
-INITIAL_ATOMS = 500     # Can set its value the same as xMax's
+INITIAL_ATOMS = 100     # Can set its value the same as xMax's
 
 
 # Configure Output Graph
@@ -90,23 +91,34 @@ graph.set_yticks(yTicks)
 # -------------------
 # Plot for Half-life = 50 years
 # -----------------------------
-plotThis(INITIAL_ATOMS, 50, 'none', '-', '#4b8bbe', "Half-life = 50 years", 3)
+# drawLine Format: drawLine(hLife, iAtoms, gColor, gMarker, gStyle, gWidth, gLabel)
+drawLine(50, INITIAL_ATOMS, '#4b8bbe', 'none', '-', 3, "Half-life = 50 years")
+# drawPoint Format: drawPoint(xCoord, yCoord, pColor, pSize)
+drawPoint(50, INITIAL_ATOMS/2, '#4b8bbe', 3)
 
 
 # Plot for Half-life = 100 years
 # ------------------------------
-plotThis(INITIAL_ATOMS, 100, 'none', '-', '#ffd43b', "Half-life = 100 years", 3)
+# drawLine Format: drawLine(hLife, iAtoms, gColor, gMarker, gStyle, gWidth, gLabel)
+drawLine(100, INITIAL_ATOMS, '#ffd43b', 'none', '-', 3, "Half-life = 100 years")
+# drawPoint Format: drawPoint(xCoord, yCoord, pColor, pSize)
+drawPoint(100, INITIAL_ATOMS/2, '#ffd43b', 3)
 
 
 # Plot for Half-life = 200 years
 # ------------------------------
-plotThis(INITIAL_ATOMS, 200, 'none', '-', '#0bd051', "Half-life = 200 years", 3)
+# drawLine Format: drawLine(hLife, iAtoms, gColor, gMarker, gStyle, gWidth, gLabel)
+drawLine(200, INITIAL_ATOMS, '#0bd051', 'none', '-', 3, "Half-life = 200 years")
+# drawPoint Format: drawPoint(xCoord, yCoord, pColor, pSize)
+drawPoint(200, INITIAL_ATOMS/2, '#0bd051', 3)
 
 
 # Plot for Half-life = 300 years
 # ------------------------------
-plotThis(INITIAL_ATOMS, 300, 'none', '-', '#d00b8a', "Half-life = 300 years", 3)
-
+# drawLine Format: drawLine(hLife, iAtoms, gColor, gMarker, gStyle, gWidth, gLabel)
+drawLine(300, INITIAL_ATOMS, '#d00b8a', 'none', '-', 3, "Half-life = 300 years")
+# drawPoint Format: drawPoint(xCoord, yCoord, pColor, pSize)
+drawPoint(300, INITIAL_ATOMS/2, '#d00b8a', 3)
 
 # Making the Graph More Readable by Adding Labels
 # -----------------------------------------------
