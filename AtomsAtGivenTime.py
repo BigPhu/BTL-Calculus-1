@@ -219,7 +219,7 @@ elif option == 2:
     graph = plt.title('Percentage of Number of Atoms at Any Given Time (' + str(Fraction(scale).numerator) + ':' + str(Fraction(scale).denominator) + ')')
     graph = plt.ylabel("Percentage of Number of Atoms (%)")
 
-graph = plt.xlabel("Time (years)")
+graph = plt.xlabel("Time")
 
 graph = plt.grid()
 graph = plt.tight_layout()
